@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Marvel</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+    <!--components style-->
+    <link href="app/common/header/style/header.style.css" rel="stylesheet" />
+    <link href="app/components/favorites/style/favorites.style.css" rel="stylesheet" />
+    <link href="app/components/list/style/list.style.css" rel="stylesheet" />
+    <!--librerias-->
+    <script src="app/assets/libs/angular/angular.js"></script>
+    <script src="app/assets/libs/angular-router/angular-ui-router.js"></script>
+
+    <!--components JS-->
+    <script src="app/app.component.js"></script>
+    <script src="app.config.js"></script>
+    <script src="app/common/header/headerComponent.js"></script>
+    <script src="app/common/header/js/headerController.js"></script>
+    <script src="app/components/favorites/favoritesComponent.js"></script>
+    <script src="app/components/favorites/js/favoritesController.js"></script>
+    <script src="app/components/list/listComponent.js"></script>
+    <script src="app/components/list/js/listController.js"></script>
+
+</head>
+
+<body>
+    <div ng-app="marvelmodule">
+        <div ui-view="header"></div>
+        <div ui-view="list"></div>
+        <div ui-view="favorites"></div>
+    </div>
+</body>
+
+</html>
