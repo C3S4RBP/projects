@@ -1,0 +1,7 @@
+favorites-component main {
+  position: absolute;
+  right: 0;
+  width: calc(20% - 20px);
+  height: calc(100% - 105px);
+  background-color: rgba(193, 193, 193, 0.39);
+  padding: 10px; }
