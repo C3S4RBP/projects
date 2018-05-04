@@ -5,8 +5,10 @@
         .module('listmodule')
         .controller('list.controller', listController);
 
-    listController.$inject = ['$scope'];
-    function listController($scope) {
+    listController.$inject = ['$scope', '$state'];
+    function listController($scope, $state) {
         var vm = this;
+        $scope.data = $state.params.data;
+        console.log($scope.data);
     }
 })();

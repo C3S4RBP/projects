@@ -5,11 +5,9 @@
         .module('headermodule')
         .controller('header.controller', headerController);
 
-    headerController.$inject = ['$scope'];
-    function headerController($scope) {
+    headerController.$inject = ['$scope', '$state'];
+    function headerController($scope, $state) {
         var vm = this;
-        vm = {
-            search: ''
-        }
+        $scope.search = $state.params.name;
     }
 })();

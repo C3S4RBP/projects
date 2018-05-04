@@ -9,6 +9,8 @@ var gulp = require('gulp'),
         pathComponents + '/favorites/*.js',
         pathComponents + '/list/js/*.js',
         pathComponents + '/list/*.js',
+        pathComponents + '/home/js/*.js',
+        pathComponents + '/home/*.js',
         pathCommon + '/header/js/*.js',
         pathCommon + '/header/*.js',
         '*.js'
@@ -16,23 +18,26 @@ var gulp = require('gulp'),
     filesCss = [
         pathComponents + '/favorites/style/',
         pathComponents + '/list/style/',
+        pathComponents + '/home/style/',
         pathCommon + '/header/style/'
     ],
     filesSass = [
         pathComponents + '/favorites/style/*.scss',
         pathComponents + '/list/style/*.scss',
+        pathComponents + '/home/style/*.scss',
         pathCommon + '/header/style/*.scss',
     ],
     filesHtml = [
         pathComponents + '/favorites/view/*.html',
         pathComponents + '/list/view/*.html',
+        pathComponents + '/home/view/*.html',
         pathCommon + '/header/view/*.html',
         'index.html'
     ]
 
 gulp.task('serve', function () {
     browserSync.init({
-        proxy: 'http://localhost/marvel'
+        proxy: 'http://localhost:8080/marvel'
     });
 });
 gulp.task('reload', function () {
@@ -52,5 +57,5 @@ gulp.task('watch', function () {
     gulp.watch(filesJs, ['reload']);
 });
 
-gulp.task('servidor', ['watch', 'serve']);
+gulp.task('servidor', ['sass', 'watch', 'serve']);
 gulp.task('archivos', ['sass']);
