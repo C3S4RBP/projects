@@ -3,12 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.component.js",
-  "dependencies": {
-    "angular-animate": "^1.6.10",
-    "angular-aria": "^1.6.10",
-    "angular-material": "^1.1.9",
-    "angular-messages": "^1.6.10"
-  },
+  "dependencies": {},
   "devDependencies": {
     "angular": "^1.6.8",
     "browser-sync": "^2.23.5",

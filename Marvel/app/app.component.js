@@ -4,9 +4,8 @@
     angular.module('marvelmodule',
         [
             'ui.router',
-            // 'ngMaterial',
-            // 'ngMessages',
-
+            
+            'homemodule',
             'headermodule',
             'listmodule',
             'favoritesmodule'

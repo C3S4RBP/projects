@@ -5,6 +5,9 @@
         .component('listComponent', {
             templateUrl: 'app/components/list/view/list.view.html',
             controller: 'list.controller as listCtrl',
-            controllerAs: 'listCtrl || $ctrl'
+            controllerAs: 'listCtrl || $ctrl',
+            bindings: {
+                data: '<'
+            }
         });
 })();

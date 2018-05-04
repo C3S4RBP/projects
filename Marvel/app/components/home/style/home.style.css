@@ -1,0 +1,40 @@
+home-component main {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: transparent;
+  background-origin: padding-box;
+  background-position-x: 0;
+  background-position-y: 0;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-image: url("https://bombanoise.com/wp-content/uploads/2018/04/avengers-infinity-war-release-date-moved-up-a-week_cskn-760x510.jpg"); }
+  home-component main .input_search {
+    width: 60%;
+    height: 60px;
+    border: 1px solid #fff;
+    background-color: transparent;
+    border-radius: 4px;
+    box-shadow: -5px -5px 4px #fff; }
+    home-component main .input_search > input {
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      color: #fff;
+      font-size: 16px;
+      padding-left: 8px;
+      text-align: center;
+      font-weight: bold;
+      caret-color: #fff; }
+    home-component main .input_search ::placeholder {
+      color: #fff; }

@@ -3,9 +3,20 @@ angular
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise("/home");
+
+
         $stateProvider
             .state('home', {
                 url: '/home',
+                views: {
+                    'home': {
+                        component: 'homeComponent'
+                    }
+                }
+            })
+
+            .state('search', {
+                url: '/search',
                 views: {
                     'header': {
                         component: 'headerComponent'
@@ -16,6 +27,18 @@ angular
                     'favorites': {
                         component: 'favoritesComponent'
                     }
+                },
+                params: {
+                    name: '',
+                    data: {}
+                },
+                resolve: {
+                    name: ['$stateParams', function ($stateParams) {
+                        return $stateParams.name;
+                    }],
+                    data: ['$stateParams', function ($stateParams) {
+                        return $stateParams.data;
+                    }]
                 }
             });
     })

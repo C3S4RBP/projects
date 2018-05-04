@@ -14,6 +14,7 @@
     <link href="app/common/header/style/header.style.css" rel="stylesheet" />
     <link href="app/components/favorites/style/favorites.style.css" rel="stylesheet" />
     <link href="app/components/list/style/list.style.css" rel="stylesheet" />
+    <link href="app/components/home/style/home.style.css" rel="stylesheet" />
     <!--librerias-->
     <script src="app/assets/libs/angular/angular.js"></script>
     <script src="app/assets/libs/angular-router/angular-ui-router.js"></script>
@@ -21,6 +22,11 @@
     <!--components JS-->
     <script src="app/app.component.js"></script>
     <script src="app.config.js"></script>
+    <script src="app/common/master.js"></script>
+    <script src="app/components/home/homeComponent.js"></script>
+    <script src="app/components/home/js/homeConstants.js"></script>
+    <script src="app/components/home/js/homeController.js"></script>
+    <script src="app/components/home/js/homeService.js"></script>
     <script src="app/common/header/headerComponent.js"></script>
     <script src="app/common/header/js/headerController.js"></script>
     <script src="app/components/favorites/favoritesComponent.js"></script>
@@ -32,6 +38,7 @@
 
 <body>
     <div ng-app="marvelmodule">
+        <div ui-view="home"></div>
         <div ui-view="header"></div>
         <div ui-view="list"></div>
         <div ui-view="favorites"></div>
