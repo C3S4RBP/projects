@@ -1,6 +1,6 @@
 header-component {
     main {
-        height: 84px;
+        height: 50px;
         width: 100%;
         background-color: #000000;
         display: flex;
@@ -11,7 +11,9 @@ header-component {
             height: 100%;
             width: 180px;
             >img {
-                margin: 12px;
+                margin: 0 10px;
+                height: 100%;
+                width: 100%;
             }
         }
         .search {
@@ -25,7 +27,7 @@ header-component {
                 width: 100%;
                 >input {
                     width: calc(100% - 30px);
-                    margin: 25px 0;
+                    margin: 10px 0;
                     height: 25px;
                     font-size: 15px;
                     border-radius: 4px;
@@ -33,6 +35,18 @@ header-component {
                     border: 0;
                 }
             }
+        }
+    }
+    .footer {
+        position: absolute;
+        bottom: 0;
+        height: 20px;
+        background-color: #000000;
+        width: 100%;
+        text-align: center;
+        >label {
+            color: #fff;
+            font-size: 12px;
         }
     }
 }

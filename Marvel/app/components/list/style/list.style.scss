@@ -1,7 +1,7 @@
 list-component {
     main {
         width: 80%;
-        height: calc(100% - 85px);
+        height: calc(100% - 70px);
         position: absolute;
         left: 0;
         background-color: rgba(193, 193, 193, 0.22);
@@ -10,54 +10,129 @@ list-component {
         flex-direction: row;
         align-items: stretch;
         overflow: auto;
-        .target {
-            width: 338px;
-            height: 290px;
-            border: 1px solid #ccc;
-            margin: 5px;
-            background-color: #fff;
-            .flip {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                transition: all 1s ease;
-                transform: perspective(600px);
-                transform-origin: 100% 50%;
-                transform-style: preserve-3d;
-                &:hover {
-                    transform: perspective(600px) rotateY(-180deg) translateX(100%);
-                }
-                .flip-1,
-                .flip-2 {
-                    position: absolute;
-                    backface-visibility: hidden;
+        .content {
+            width: calc(100% - 36px);
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: stretch;
+            overflow: auto;
+            .target {
+                width: 196px;
+                height: 240px;
+                border: 1px solid #ccc;
+                margin: 5px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+                .flip {
                     width: 100%;
                     height: 100%;
-                }
-                .flip-2 {
-                    transform: rotateY(-180deg);
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    flex-wrap: wrap;
-                    flex-direction: row;
-                    align-items: stretch;
-                    .related {
-                        border-bottom: 1px solid #dadada;
-                        width: 47%;
-                        font-size: 14px;
-                        margin: 0 3px;
-                        justify-content: center;
-                        align-items: center;
-                        display: flex;
-                        overflow: auto;
+                    position: relative;
+                    transition: all 1s ease;
+                    transform: perspective(600px);
+                    transform-origin: 100% 50%;
+                    transform-style: preserve-3d;
+                    &:hover {
+                        transform: perspective(600px) rotateY(-180deg) translateX(100%);
+                    }
+                    .flip-1 {
+                        position: absolute;
+                        backface-visibility: hidden;
+                        width: 100%;
+                        height: 100%;
+                        >.name {
+                            width: 100%;
+                            height: 40px;
+                            position: absolute;
+                            bottom: 0;
+                            background-color: #3796d2;
+                            justify-content: center;
+                            display: flex;
+                            align-items: center;
+                            color: #fff;
+                        }
+                        >.picture {
+                            height: calc(100% - 40px);
+                            border-radius: 10px;
+                            img {
+                                height: 100%;
+                                width: 100%;
+                                border-radius: 10px;
+                            }
+                        }
+                    }
+                    .flip-2 {
+                        position: absolute;
+                        backface-visibility: hidden;
+                        transform: rotateY(-180deg);
+                        width: 100%;
+                        height: 100%;
+                        /* display: flex; */
+                        flex-wrap: wrap;
+                        /* flex-direction: row; */
+                        /* align-items: stretch; */
+                        background-color: #fff;
+                        border-radius: 10px;
+                        .moreinfo {
+                            width: 100%;
+                            height: 19px;
+                            background-color: #F0141E;
+                            position: absolute;
+                            bottom: 0;
+                            margin-right: 4px;
+                            border-radius: 4px;
+                            font-family: fantasy;
+                            line-height: 13px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            >label {
+                                color: #fff;
+                            }
+                        }
+                        .content {
+                            width: 100%;
+                            height: calc(100% - 36px);
+                            overflow: auto;
+                            padding-left: 4px;
+                            .related {
+                                font-size: 12px;
+                                border-bottom: 1px solid #ddd;
+                                width: 100%;
+                            }
+                        }
                     }
                 }
             }
-            img {
-                width: 150px;
-                border-radius: 50%;
+        }
+        .pag {
+            width: 30px;
+            >.numpag {
+                width: 96%;
+                height: 5%;
+                margin: 10px auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 4px;
+                box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
             }
         }
     }
+}
+
+.md-button.md-default-theme.md-primary,
+.md-button.md-primary {
+    color: #F0141E;
+    background-color: #322827;
+}
+
+button.md-default-theme:not([disabled]):hover,
+.md-button:not([disabled]):hover {
+    background-color: rgba(158, 158, 158, 0.2) !important;
+}
+
+.md-cancel-button {
+    background-color: transparent !important;
 }

@@ -4,7 +4,11 @@
     </div>
     <div class="search">
         <div>
-            <input type="text" ng-model="search" placeholder="Escribe el personaje y luego enter" />
+            <input type="text" ng-model="search" placeholder="Escribe el personaje y luego enter" ng-keypress="searchCharacter($event)"
+            />
         </div>
     </div>
 </main>
+<div class="footer">
+    <label>2018 - Todos los derechos reservados</label>
+</div>

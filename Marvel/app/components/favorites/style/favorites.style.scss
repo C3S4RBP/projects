@@ -3,8 +3,24 @@ favorites-component {
         position: absolute;
         right: 0;
         width: calc(20% - 20px);
-        height: calc(100% - 105px);
+        height: calc(100% - 90px);
         background-color: rgba(193, 193, 193, 0.39);
         padding: 10px;
+        >.content {
+            width: 100%;
+            height: calc(100% - 78px);
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: stretch;
+            overflow: auto;
+            >.target {
+                border: 1px solid red;
+                width: 87%;
+                height: 50%;
+                margin: 10px auto;
+            }
+        }
     }
 }
