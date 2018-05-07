@@ -20,6 +20,8 @@
                     <div class="moreinfo" ng-click="moreInfo(target)">
                         <label>ver +</label>
                     </div>
+                    <input type="checkbox" name="mycheckbox" ng-model="target.checked" ng-click="checkedFun(target)" ng-disabled="checkedCount >= 3 && !target.checked"
+                        ng-checked='target.checked' />
                 </div>
             </div>
         </div>
@@ -30,5 +32,6 @@
             <div ng-click="otherPag(dpag)">{{dpag.id}}</div>
         </div>
         <div class="numpag">d</div>
+        <div class="numpag allAdd" ng-click="checkedFavoritesAdd()" ng-if="checkedCount === 3">+</div>
     </div>
 </main>
