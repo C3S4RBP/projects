@@ -69,12 +69,13 @@ list-component main {
           background-color: #fff;
           border-radius: 10px; }
           list-component main .content .target .flip .flip-2 .moreinfo {
-            width: 100%;
+            width: calc(100% - 21px);
             height: 19px;
             background-color: #F0141E;
             position: absolute;
             bottom: 0;
             margin-right: 4px;
+            margin-left: 20px;
             border-radius: 4px;
             font-family: fantasy;
             line-height: 13px;
@@ -103,6 +104,9 @@ list-component main {
       align-items: center;
       border-radius: 4px;
       box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19); }
+    list-component main .pag .allAdd {
+      background-color: #F0141E;
+      color: #fff; }
 
 .md-button.md-default-theme.md-primary,
 .md-button.md-primary {

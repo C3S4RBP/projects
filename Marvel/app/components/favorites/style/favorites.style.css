@@ -15,7 +15,15 @@ favorites-component main {
     align-items: stretch;
     overflow: auto; }
     favorites-component main > .content > .target {
-      border: 1px solid red;
       width: 87%;
       height: 50%;
       margin: 10px auto; }
+      favorites-component main > .content > .target .picture {
+        height: calc(100% - 30px);
+        width: 100%; }
+        favorites-component main > .content > .target .picture img {
+          width: 100%;
+          height: 100%; }
+      favorites-component main > .content > .target .name {
+        width: 100%;
+        height: 30px; }
