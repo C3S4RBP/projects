@@ -9,13 +9,21 @@ list-component main {
   flex-direction: row;
   align-items: stretch;
   overflow: auto; }
+  list-component main .rtaSearch {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    list-component main .rtaSearch img {
+      height: 80px;
+      margin-top: 7px; }
   list-component main .content {
     width: calc(100% - 36px);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: stretch;
-    overflow: auto; }
+    overflow: auto;
+    height: calc(100% - 88px); }
     list-component main .content .target {
       width: 196px;
       height: 240px;
@@ -55,7 +63,8 @@ list-component main {
             list-component main .content .target .flip .flip-1 > .picture img {
               height: 100%;
               width: 100%;
-              border-radius: 10px; }
+              border-radius: 10px;
+              margin-top: 0; }
         list-component main .content .target .flip .flip-2 {
           position: absolute;
           backface-visibility: hidden;
@@ -103,7 +112,12 @@ list-component main {
       justify-content: center;
       align-items: center;
       border-radius: 4px;
+      background-color: #fff;
       box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19); }
+      list-component main .pag > .numpag .arrow_top {
+        transform: rotate(90deg); }
+      list-component main .pag > .numpag .arrow_bottom {
+        transform: rotate(270deg); }
     list-component main .pag .allAdd {
       background-color: #F0141E;
       color: #fff; }

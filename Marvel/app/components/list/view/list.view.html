@@ -1,4 +1,8 @@
 <main>
+    <div class="rtaSearch">
+        <img src="app/resource/icons/characters.png" />
+        <label> Personajes </label>
+    </div>
     <div class="content">
         <div class="target" ng-repeat="target in data.results">
             <div class="flip">
@@ -27,11 +31,15 @@
         </div>
     </div>
     <div class="pag">
-        <div class="numpag">u</div>
+        <div class="numpag">
+            <img src="app/resource/icons/btn_arrow_left.png" class="arrow_top">
+        </div>
         <div class="numpag" ng-repeat="dpag in allpag">
             <div ng-click="otherPag(dpag)">{{dpag.id}}</div>
         </div>
-        <div class="numpag">d</div>
+        <div class="numpag">
+            <img src="app/resource/icons/btn_arrow_left.png" class="arrow_bottom">
+        </div>
         <div class="numpag allAdd" ng-click="checkedFavoritesAdd()" ng-if="checkedCount === 3">+</div>
     </div>
 </main>
