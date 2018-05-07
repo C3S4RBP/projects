@@ -5,8 +5,8 @@
         .module('favoritesmodule')
         .service('favorite.service', favoriteService);
 
-    favoriteService.$inject = ['$localStorage'];
-    function favoriteService($localStorage) {
+    favoriteService.$inject = ['$localStorage', '$state'];
+    function favoriteService($localStorage, $state) {
         this.getStorage = getStorage;
         this.setStorage = setStorage;
         this.removeStorage = removeStorage;
@@ -21,11 +21,13 @@
         function setStorage(obj) {
             $localStorage[obj.id] = JSON.stringify(obj);
             allStorage(obj.id, 1);
+            $state.reload();
         }
 
         function removeStorage(key) {
             delete $localStorage[key];
             allStorage(key, 0);
+            $state.reload();
         }
 
         function getAllStorage() {
