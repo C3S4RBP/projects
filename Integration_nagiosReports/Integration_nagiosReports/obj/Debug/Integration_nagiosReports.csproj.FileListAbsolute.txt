@@ -1,0 +1,12 @@
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\bin\Debug\Integration_nagiosReports.exe.config
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\bin\Debug\Integration_nagiosReports.exe
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\bin\Debug\Integration_nagiosReports.pdb
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\obj\Debug\Integration_nagiosReports.INR.resources
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\obj\Debug\Integration_nagiosReports.Properties.Resources.resources
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\obj\Debug\Integration_nagiosReports.csproj.GenerateResource.Cache
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\obj\Debug\Integration_nagiosReports.csproj.CoreCompileInputs.cache
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\obj\Debug\Integration_nagiosReports.exe
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\obj\Debug\Integration_nagiosReports.pdb
+D:\Projects\Integration_nagiosReports\Integration_nagiosReports\obj\Debug\Integration_nagiosReports.csprojResolveAssemblyReference.cache
