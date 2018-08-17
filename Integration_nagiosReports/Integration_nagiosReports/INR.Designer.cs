@@ -33,7 +33,8 @@
             this.btn_insert = new System.Windows.Forms.Button();
             this.txt_log = new System.Windows.Forms.TextBox();
             this.txt_error = new System.Windows.Forms.TextBox();
-            this.btn_dataDiary = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.inpyear = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // CB_mes
@@ -53,7 +54,7 @@
             "Octubre",
             "Noviembre",
             "Diciembre"});
-            this.CB_mes.Location = new System.Drawing.Point(48, 8);
+            this.CB_mes.Location = new System.Drawing.Point(149, 8);
             this.CB_mes.Name = "CB_mes";
             this.CB_mes.Size = new System.Drawing.Size(121, 21);
             this.CB_mes.TabIndex = 0;
@@ -62,7 +63,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 11);
+            this.label1.Location = new System.Drawing.Point(113, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 1;
@@ -70,51 +71,61 @@
             // 
             // btn_insert
             // 
-            this.btn_insert.Location = new System.Drawing.Point(461, 6);
+            this.btn_insert.Location = new System.Drawing.Point(455, 6);
             this.btn_insert.Name = "btn_insert";
-            this.btn_insert.Size = new System.Drawing.Size(91, 33);
+            this.btn_insert.Size = new System.Drawing.Size(97, 23);
             this.btn_insert.TabIndex = 2;
-            this.btn_insert.Text = "Iniciar proceso";
+            this.btn_insert.Text = "Iniciar Carga";
             this.btn_insert.UseVisualStyleBackColor = true;
             this.btn_insert.Click += new System.EventHandler(this.btn_insert_Click);
             // 
             // txt_log
             // 
-            this.txt_log.Location = new System.Drawing.Point(12, 48);
+            this.txt_log.Location = new System.Drawing.Point(12, 35);
             this.txt_log.Multiline = true;
             this.txt_log.Name = "txt_log";
-            this.txt_log.Size = new System.Drawing.Size(271, 215);
-            this.txt_log.TabIndex = 4;
+            this.txt_log.ReadOnly = true;
+            this.txt_log.Size = new System.Drawing.Size(267, 228);
+            this.txt_log.TabIndex = 3;
             // 
             // txt_error
             // 
-            this.txt_error.Location = new System.Drawing.Point(289, 48);
+            this.txt_error.Location = new System.Drawing.Point(285, 35);
             this.txt_error.Multiline = true;
             this.txt_error.Name = "txt_error";
-            this.txt_error.Size = new System.Drawing.Size(263, 215);
-            this.txt_error.TabIndex = 5;
+            this.txt_error.ReadOnly = true;
+            this.txt_error.Size = new System.Drawing.Size(267, 228);
+            this.txt_error.TabIndex = 4;
             // 
-            // btn_dataDiary
+            // label2
             // 
-            this.btn_dataDiary.Location = new System.Drawing.Point(367, 6);
-            this.btn_dataDiary.Name = "btn_dataDiary";
-            this.btn_dataDiary.Size = new System.Drawing.Size(88, 33);
-            this.btn_dataDiary.TabIndex = 6;
-            this.btn_dataDiary.Text = "Proceso Diario";
-            this.btn_dataDiary.UseVisualStyleBackColor = true;
-            this.btn_dataDiary.Click += new System.EventHandler(this.btn_dataDiary_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Año";
+            // 
+            // inpyear
+            // 
+            this.inpyear.Location = new System.Drawing.Point(44, 9);
+            this.inpyear.Name = "inpyear";
+            this.inpyear.Size = new System.Drawing.Size(49, 20);
+            this.inpyear.TabIndex = 6;
             // 
             // INR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 275);
-            this.Controls.Add(this.btn_dataDiary);
+            this.Controls.Add(this.inpyear);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_error);
             this.Controls.Add(this.txt_log);
             this.Controls.Add(this.btn_insert);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CB_mes);
+            this.MaximizeBox = false;
             this.Name = "INR";
             this.Text = "Integration Nagios Reports";
             this.Load += new System.EventHandler(this.INR_Load);
@@ -130,7 +141,8 @@
         private System.Windows.Forms.Button btn_insert;
         private System.Windows.Forms.TextBox txt_log;
         private System.Windows.Forms.TextBox txt_error;
-        private System.Windows.Forms.Button btn_dataDiary;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox inpyear;
     }
 }
 

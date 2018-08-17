@@ -14,6 +14,7 @@ namespace Integration_nagiosReports
 
         DateTime fechaActual = DateTime.Today;
         Database db = new Database();
+        int anio = 0;
         dataNagios dat_nagios = new dataNagios();
         DateTime start;
         String hostname = Environment.MachineName;
@@ -24,73 +25,78 @@ namespace Integration_nagiosReports
         private void INR_Load(object sender, EventArgs e)
         {
             this.Show();
-            MessageBox.Show(db.checkDatabase());
+            WriteToEventLog("nagiosReports", db.checkDatabase(), 1, 1);
             btn_insert.Enabled = false;
-            btn_dataDiary.Enabled = false;
             txt_log.ScrollBars = ScrollBars.Vertical;
             txt_error.ScrollBars = ScrollBars.Vertical;
         }
 
         private void btn_insert_Click(object sender, EventArgs e)
         {
+            inpyear.ReadOnly = !inpyear.ReadOnly;
+            CB_mes.Enabled = !CB_mes.Enabled;
             txt_log.Clear();
             txt_error.Clear();
-            btn_dataDiary.Enabled = false;
+            anio = Convert.ToInt32(inpyear.Text);
             if (existData(CB_mes.Text,true))
             {
                 start = DateTime.Now;
-                WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2,1);
+                WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 1,300);
                 btn_insert.Enabled = false;
-                MessageBox.Show(String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, fechaActual.Year));
+                //MessageBox.Show(String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, anio));
+                WriteToEventLog("nagiosReports", String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, anio), 2, 1);
                 getData(CB_mes.Text, "I");
             }
             else
             {
-                DialogResult result = MessageBox.Show(String.Format("Ya existe informacion para el mes de {0} y Año {1}. ¿Desea actualizar la informacion?", CB_mes.Text, fechaActual.Year), "Alerta", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
+                //DialogResult result = MessageBox.Show(String.Format("Ya existe informacion para el mes de {0} y Año {1}. ¿Desea actualizar la informacion?", CB_mes.Text, anio), "Alerta", MessageBoxButtons.YesNo);
+                //if (result == DialogResult.Yes)
+                //{
                     start = DateTime.Now;
                     btn_insert.Enabled = false;
-                    WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2,1);
+                    WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 1,300);
                     getData(CB_mes.Text, "U");
-                }
+                //}
             }
+            
         }
 
         private void cb_mes_cambio(object sender, EventArgs e)
         {
             btn_insert.Enabled = CB_mes.Text == "" ? false : true;
-            btn_dataDiary.Enabled = CB_mes.Text == "" ? false : true;
         }
 
         private Boolean existData(String mes, Boolean isMonthly)
         {
+            anio = Convert.ToInt32(inpyear.Text);
             if (isMonthly)
             {
-                return db.existData(mes, fechaActual.Year);
+                return db.existData(mes, anio);
             }
             else
             {
-                return db.existDataDiary(mes, fechaActual.Year);
+                return db.existDataDiary(mes, anio);
             }
         }
 
         private void getData(String mes, String operation)
         {
+            anio = Convert.ToInt32(inpyear.Text);
             String startDate = "";
             String endDate = "";
             switch (mes)
             {
                 case "Diciembre":
-                    startDate = (new DateTime(fechaActual.Year, 12, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
-                    endDate = (new DateTime((fechaActual.Year + 1), 1, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                    startDate = (new DateTime(anio, 12, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                    endDate = (new DateTime((anio + 1), 1, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
                     break;
                 default:
-                    startDate = (new DateTime(fechaActual.Year, GetDayofMonth(mes), 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
-                    endDate = (new DateTime(fechaActual.Year, GetDayofMonth(mes)+1, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                    startDate = (new DateTime(anio, GetDayofMonth(mes), 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                    endDate = (new DateTime(anio, GetDayofMonth(mes)+1, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
                     break;
             }
-            DataTable dt = db.getHostService(operation,fechaActual.Year, mes, true);
+
+            DataTable dt = db.getHostService(operation,anio, mes, true);
             foreach (DataRow row in dt.Rows)
             {
                 String url_final = String.Format(url, row.ItemArray[0], row.ItemArray[1], startDate, endDate);
@@ -103,13 +109,50 @@ namespace Integration_nagiosReports
                         setMsgLog("Url " + url_final, 1);
                         setMsgLog("-----------------------------------------", 1);
                         setMsgLog("Tiempos: ok:" + response.time_ok + ", Warning:" + response.time_warning + ", Critical:" + response.time_critical + " No data: " + response.time_indeterminate_nodata, 1);
-                        db.insertUpdateData(operation, 1, Convert.ToInt32(row.ItemArray[2]), fechaActual.Year, mes, response.time_ok, response.time_warning, response.time_critical, response.time_indeterminate_nodata);
+                        db.insertUpdateData(operation, 1, Convert.ToInt32(row.ItemArray[2]), anio, mes, response.time_ok, response.time_warning, response.time_critical, response.time_indeterminate_nodata, url_final);
                         setMsgLog("cargado el host " + response.host_name + " y servicio " + response.description, 1);
+
+                        /* ************** */
+                        /* cargue diario */
+                        /* ************** */
+
+                        txt_log.Clear();
+                        txt_error.Clear();
+                        btn_insert.Enabled = false;
+                        if (existData(CB_mes.Text, false))
+                        {
+                            start = DateTime.Now;
+                            //WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2, 2);
+                            //MessageBox.Show(String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, anio));
+                            getDataDay(CB_mes.Text, "I", row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString());
+                        }
+                        else
+                        {
+                            //DialogResult result = MessageBox.Show(String.Format("Ya existe informacion para el mes de {0} y Año {1}. ¿Desea actualizar la informacion?", CB_mes.Text, anio), "Alerta", MessageBoxButtons.YesNo);
+                            //if (result == DialogResult.Yes)
+                            //{
+                                start = DateTime.Now;
+                                //WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2, 2);
+                                getDataDay(CB_mes.Text, "U", row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString());
+                            //}
+                        }
+                        WriteToEventLog(
+                           "nagiosReports",
+                           "Con datos \n: " + txt_log.Text + "\n" + "****************************************************\n sin data \n **************************************************** \n " + txt_error.Text,
+                           1,
+                           2);
+                        txt_log.Clear();
+                        txt_error.Clear();
+                        //btn_dataDiary_Click(sender, e);
                     }
                     else
                     {
+                        //MessageBox.Show("El host/Servicio no retorno datos en el mes, por ende no se requiere obtener datos diarios");
+                        WriteToEventLog("nagiosReports", "El host/Servicio no retorno datos en el mes, por ende no se requiere obtener datos diarios \n " + url_final, 0, 200);
+                        setMsgLog("Url " + url_final, 1);
                         setMsgLog(response.host_name + " y servicio " + response.description + " - Tiempos: ok:" + response.time_ok + ", Warning:" + response.time_warning + ", Critical:" + response.time_critical, 2);
                         setMsgLog("=========================================", 2);
+                        db.insertUpdateData("I", 3, Convert.ToInt32(row.ItemArray[2]), anio, mes, 0, 0, 0, 0, "");
                     }
                     setMsgLog("=========================================", 1);
                 }
@@ -120,18 +163,12 @@ namespace Integration_nagiosReports
                     setMsgLog("=========================================", 2);
                 }
             }
-            db.insertUpdateData(operation, 2, 0, fechaActual.Year, mes, 0, 0, 0, 0);
+            db.insertUpdateData(operation, 2, 0, anio, mes, 0, 0, 0, 0,"");
             btn_insert.Enabled = true;
-            if (txt_log.TextLength > 0)
-            {
-                WriteToEventLog("nagiosReports", txt_log.Text, 1,1);
-            }
-            if (txt_error.TextLength > 0)
-            {
-                WriteToEventLog("nagiosReports", txt_error.Text, 0,1);
-            }
-            WriteToEventLog("nagiosReports", String.Format("Termina Cargue del proceso del mes de: {0} tiempo de ejecución: {1}", mes, DateTime.Now.Subtract(start).ToString()), 2,1);
-            MessageBox.Show(String.Format("Termino proceso de cargue exitosamente para el mes de: {0}", mes));
+            inpyear.ReadOnly = !inpyear.ReadOnly;
+            CB_mes.Enabled = !CB_mes.Enabled;
+            WriteToEventLog("nagiosReports", String.Format("Termina Cargue del proceso del mes de: {0} tiempo de ejecución: {1}", mes, DateTime.Now.Subtract(start).ToString()), 1,300);
+            //MessageBox.Show(String.Format("Termino proceso de cargue exitosamente para el mes de: {0}", mes));
         }
 
         private void setMsgLog(String msg, int tipoCampo)
@@ -202,98 +239,89 @@ namespace Integration_nagiosReports
             }
         }
 
-        private void btn_dataDiary_Click(object sender, EventArgs e)
-        {
-            txt_log.Clear();
-            txt_error.Clear();
-            btn_insert.Enabled = false;
-            if (existData(CB_mes.Text, false))
-            {
-                start = DateTime.Now;
-                WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2,2);
-                btn_dataDiary.Enabled = false;
-                MessageBox.Show(String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, fechaActual.Year));
-                getDataDay(CB_mes.Text, "I");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show(String.Format("Ya existe informacion para el mes de {0} y Año {1}. ¿Desea actualizar la informacion?", CB_mes.Text, fechaActual.Year), "Alerta", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    start = DateTime.Now;
-                    btn_dataDiary.Enabled = false;
-                    WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2,2);
-                    getDataDay(CB_mes.Text, "U");
-                }
-            }
-        }
+        //private void btn_dataDiary_Click(object sender, EventArgs e)
+        //{
+        //    txt_log.Clear();
+        //    txt_error.Clear();
+        //    btn_insert.Enabled = false;
+        //    if (existData(CB_mes.Text, false))
+        //    {
+        //        start = DateTime.Now;
+        //        WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2,2);
+        //        MessageBox.Show(String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, anio));
+        //        getDataDay(CB_mes.Text, "I");
+        //    }
+        //    else
+        //    {
+        //        DialogResult result = MessageBox.Show(String.Format("Ya existe informacion para el mes de {0} y Año {1}. ¿Desea actualizar la informacion?", CB_mes.Text, anio), "Alerta", MessageBoxButtons.YesNo);
+        //        if (result == DialogResult.Yes)
+        //        {
+        //            start = DateTime.Now;
+        //            WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2,2);
+        //            getDataDay(CB_mes.Text, "U");
+        //        }
+        //    }
+        //}
 
-        private void getDataDay(String mes, String operation)
+        private void getDataDay(String mes, String operation, String host, String Service, String idHost)
         {
             String startDate = "";
             String endDate = "";
-            int cantDays = DateTime.DaysInMonth(fechaActual.Year, GetDayofMonth(mes));
-            DataTable dt = db.getHostService(operation,fechaActual.Year,mes,false);
+            anio = Convert.ToInt32(inpyear.Text);
+            int cantDays = DateTime.DaysInMonth(anio, GetDayofMonth(mes));
+            //DataTable dt = db.getHostService(operation,anio,mes,false);
             for(int idx = 1; idx<= cantDays; idx++)
             {
                 if(idx == cantDays)
                 {
-                    startDate = (new DateTime(fechaActual.Year, GetDayofMonth(mes), idx).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                    startDate = (new DateTime(anio, GetDayofMonth(mes), idx).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
                     if (mes == "Diciembre")
                     {
-                        endDate = (new DateTime((fechaActual.Year+1), 1, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                        endDate = (new DateTime((anio+1), 1, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
                     }
                     else
                     {
-                        endDate = (new DateTime(fechaActual.Year, GetDayofMonth(mes) + 1, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                        endDate = (new DateTime(anio, GetDayofMonth(mes) + 1, 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
                     }
                 }
                 else
                 {
-                    startDate = (new DateTime(fechaActual.Year, GetDayofMonth(mes), idx).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
-                    endDate = (new DateTime(fechaActual.Year, GetDayofMonth(mes), idx + 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                    startDate = (new DateTime(anio, GetDayofMonth(mes), idx).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
+                    endDate = (new DateTime(anio, GetDayofMonth(mes), idx + 1).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
                 }
-                foreach (DataRow row in dt.Rows)
+
+                String url_final = String.Format(url, host, Service, startDate, endDate);
+                setMsgLog("Consumiendo el host " + host + " Servicio " + Service + " id " + idHost + " dia " + idx.ToString(), 1);
+                var response = dat_nagios.getDataNagios(url_final);
+                if (response != null)
                 {
-                    String url_final = String.Format(url, row.ItemArray[0], row.ItemArray[1], startDate, endDate);
-                    setMsgLog("Consumiendo el host " + row.ItemArray[0] + " Servicio " + row.ItemArray[1] + " id " + row.ItemArray[2] + " dia " + idx.ToString(), 1);
-                    var response = dat_nagios.getDataNagios(url_final);
-                    if (response != null)
+                    if (!(response.time_ok == 0 && response.time_warning == 0 && response.time_critical == 0))
                     {
-                        if (!(response.time_ok == 0 && response.time_warning == 0 && response.time_critical == 0))
-                        {
-                            setMsgLog("Url " + url_final, 1);
-                            setMsgLog("-----------------------------------------", 1);
-                            setMsgLog("Tiempos: ok:" + response.time_ok + ", Warning:" + response.time_warning + ", Critical:" + response.time_critical + " No data: " + response.time_indeterminate_nodata, 1);
-                            db.insertUpdateDataDiary(operation, 1, Convert.ToInt32(row.ItemArray[2]), fechaActual.Year, mes,idx, response.time_ok, response.time_warning, response.time_critical, response.time_indeterminate_nodata);
-                            setMsgLog("cargado el host " + response.host_name + " y servicio " + response.description, 1);
-                        }
-                        else
-                        {
-                            setMsgLog(response.host_name + " y servicio " + response.description + " - Tiempos: ok:" + response.time_ok + ", Warning:" + response.time_warning + ", Critical:" + response.time_critical, 2);
-                            setMsgLog("========================================", 2);
-                        }
-                        setMsgLog("=========================================", 1);
+                        setMsgLog("Url " + url_final, 1);
+                        setMsgLog("-----------------------------------------", 1);
+                        setMsgLog("Tiempos: ok:" + response.time_ok + ", Warning:" + response.time_warning + ", Critical:" + response.time_critical + " No data: " + response.time_indeterminate_nodata, 1);
+                        db.insertUpdateDataDiary(operation, 1, Convert.ToInt32(idHost), anio, mes,idx, response.time_ok, response.time_warning, response.time_critical, response.time_indeterminate_nodata, url_final);
+                        setMsgLog("cargado el host " + response.host_name + " y servicio " + response.description, 1);
                     }
                     else
                     {
-                        setMsgLog("la respuesta es null" + row.ItemArray[0] + " Servicio " + row.ItemArray[1], 2);
-                        setMsgLog("=========================================", 1);
-                        setMsgLog("=========================================", 2);
+                        setMsgLog(response.host_name + " y servicio " + response.description + " - Tiempos: ok:" + response.time_ok + ", Warning:" + response.time_warning + ", Critical:" + response.time_critical, 2);
+                        setMsgLog("========================================", 2);
                     }
+                    setMsgLog("========================================", 1);
                 }
-                db.insertUpdateDataDiary(operation, 2, 0, fechaActual.Year, mes, idx, 0, 0, 0, 0);
-                WriteToEventLog(
-                        "nagiosReports",
-                        "dia: " + idx.ToString() + "\n" + txt_log.Text + "\n"+ "****************************************************\n sin data \n **************************************************** \n dia: " + idx.ToString() + "\n" + txt_error.Text,
-                        1,
-                        2);
-                WriteToEventLog("nagiosReports", String.Format("Termina Cargue del proceso del mes de: {0} y dia: {1} tiempo de ejecución: {2}", mes, idx.ToString(), DateTime.Now.Subtract(start).ToString()), 2,2);
-                txt_log.Clear();
-                txt_error.Clear();
+                else
+                {
+                    setMsgLog("la respuesta es null" + host + " Servicio " + Service, 2);
+                    setMsgLog("=========================================", 1);
+                    setMsgLog("=========================================", 2);
+                }
+
+                db.insertUpdateDataDiary(operation, 2, 0, anio, mes, idx, 0, 0, 0, 0, "");
+//               WriteToEventLog("nagiosReports", String.Format("Termina Cargue del proceso del mes de: {0} y dia: {1} tiempo de ejecución: {2}, para el host:{3} - {4}", mes, idx.ToString(), DateTime.Now.Subtract(start).ToString(),host,idHost), 2,2);
+                
             }
-            btn_dataDiary.Enabled = true;
-            MessageBox.Show("Se termino el cargue de información");
+            //MessageBox.Show("Se termino el cargue de información");
         }
 
         private int GetDayofMonth(String mes)

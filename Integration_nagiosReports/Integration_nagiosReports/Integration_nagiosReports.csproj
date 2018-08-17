@@ -58,7 +58,7 @@
     <Compile Include="INR.Designer.cs">
       <DependentUpon>INR.cs</DependentUpon>
     </Compile>
-    <Compile Include="ngobject.cs" />
+    <Compile Include="NgObject\ngobject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="INR.resx">

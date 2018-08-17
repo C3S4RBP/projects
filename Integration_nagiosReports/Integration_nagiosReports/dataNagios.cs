@@ -25,7 +25,7 @@ namespace Integration_nagiosReports
                 return objRta.data.service;
             }catch(Exception ex)
             {
-                principal.WriteToEventLog("nagiosReports", String.Format("Error: ", ex.Message), 0, -1);
+                principal.WriteToEventLog("nagiosReports", String.Format("Error: ", ex.Message), 0, 100);
                 return objRta.data.service;
             }
         }

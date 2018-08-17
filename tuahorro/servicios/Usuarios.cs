@@ -8,6 +8,7 @@ namespace servicios
 {
     public class Usuarios
     {
+        public int idusuarios { get; set; }
         public int idrol { get; set; }
         public string nombreusuario { get; set; }
         public string pass { get; set; }

@@ -86,7 +86,7 @@ namespace servicios
             return result;
         }
 
-        public DataSet Usuarios(String opcion,String idUsuario, Usuarios usuario)
+        public DataSet Usuarios(String opcion,Int32 idUsuario, Usuarios usuario)
         {
             
             switch (opcion)

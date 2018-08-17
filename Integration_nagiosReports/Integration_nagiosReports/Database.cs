@@ -83,25 +83,36 @@ namespace Integration_nagiosReports
             return dt;
         }
 
-        public void insertUpdateData(String operation, int option, int idHostService, int anio, String mes, int v_ok, int v_warnign, int v_critial, int v_nodata)
+        public void insertUpdateData(String operation, int option, int idHostService, int anio, String mes, int v_ok, int v_warnign, int v_critial, int v_nodata, String url)
         {
 
             SqlConnection scn = new SqlConnection(settings.ConnectionString);
-            sp = "NG_INSERT_UPDATE";
-            SqlCommand spcmd = new SqlCommand(sp, scn);
-            spcmd.Parameters.Add(new SqlParameter("@I_OPERATION", operation));
-            spcmd.Parameters.Add(new SqlParameter("@I_OPTION", option));
-            spcmd.Parameters.Add(new SqlParameter("@I_IDHOST", idHostService));
-            spcmd.Parameters.Add(new SqlParameter("@I_ANIO", anio));
-            spcmd.Parameters.Add(new SqlParameter("@I_MES", mes));
-            spcmd.Parameters.Add(new SqlParameter("@I_OK", v_ok));
-            spcmd.Parameters.Add(new SqlParameter("@I_WARNING", v_warnign));
-            spcmd.Parameters.Add(new SqlParameter("@I_CRITICAL", v_critial));
-            spcmd.Parameters.Add(new SqlParameter("@I_NODATA", v_nodata));
-            spcmd.CommandType = CommandType.StoredProcedure;
-            scn.Open();
-            spcmd.ExecuteReader();
-            scn.Close();
+            try
+            {
+                sp = "NG_INSERT_UPDATE";
+                SqlCommand spcmd = new SqlCommand(sp, scn);
+                spcmd.Parameters.Add(new SqlParameter("@I_OPERATION", operation));
+                spcmd.Parameters.Add(new SqlParameter("@I_OPTION", option));
+                spcmd.Parameters.Add(new SqlParameter("@I_IDHOST", idHostService));
+                spcmd.Parameters.Add(new SqlParameter("@I_ANIO", anio));
+                spcmd.Parameters.Add(new SqlParameter("@I_MES", mes));
+                spcmd.Parameters.Add(new SqlParameter("@I_OK", v_ok));
+                spcmd.Parameters.Add(new SqlParameter("@I_WARNING", v_warnign));
+                spcmd.Parameters.Add(new SqlParameter("@I_CRITICAL", v_critial));
+                spcmd.Parameters.Add(new SqlParameter("@I_NODATA", v_nodata));
+                spcmd.Parameters.Add(new SqlParameter("@I_URL", url));
+                spcmd.CommandType = CommandType.StoredProcedure;
+                scn.Open();
+                spcmd.ExecuteReader();
+            }
+            catch (SqlException x)
+            {
+                Console.WriteLine(x.Message);
+            }
+            finally
+            {
+                scn.Close();
+            }
         }
 
         public Boolean existDataDiary(String mes, int anio)
@@ -126,9 +137,8 @@ namespace Integration_nagiosReports
             return rta;
         }
 
-        public void insertUpdateDataDiary(String operation, int option, int idHostService, int anio, String mes,int day, int v_ok, int v_warnign, int v_critial, int v_nodata)
+        public void insertUpdateDataDiary(String operation, int option, int idHostService, int anio, String mes,int day, int v_ok, int v_warnign, int v_critial, int v_nodata, String url)
         {
-
             SqlConnection scn = new SqlConnection(settings.ConnectionString);
             sp = "NG_INSERT_UPDATE_DIARY";
             SqlCommand spcmd = new SqlCommand(sp, scn);
@@ -142,6 +152,7 @@ namespace Integration_nagiosReports
             spcmd.Parameters.Add(new SqlParameter("@I_WARNING", v_warnign));
             spcmd.Parameters.Add(new SqlParameter("@I_CRITICAL", v_critial));
             spcmd.Parameters.Add(new SqlParameter("@I_NODATA", v_nodata));
+            spcmd.Parameters.Add(new SqlParameter("@I_URL", url));
             spcmd.CommandType = CommandType.StoredProcedure;
             scn.Open();
             spcmd.ExecuteReader();

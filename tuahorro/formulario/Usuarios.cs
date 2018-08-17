@@ -1,5 +1,6 @@
 ﻿using servicios;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace formulario
@@ -14,7 +15,7 @@ namespace formulario
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-            grid_usuarios.DataSource = db.Usuarios("S", "1", null).Tables[0];
+            grid_usuarios.DataSource = db.Usuarios("S", 1, null).Tables[0];
             grid_usuarios.Columns[0].ReadOnly = true;
             grid_usuarios.Columns[4].ReadOnly = true;
             cb_rol.ValueMember = "id";
@@ -25,10 +26,11 @@ namespace formulario
         private void grid_usuarios_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             servicios.Usuarios data_user = new servicios.Usuarios();
+            data_user.idusuarios = Int32.Parse(grid_usuarios.Rows[e.RowIndex].Cells[grid_usuarios.Columns[0].Name].Value.ToString());
             data_user.nombreusuario = grid_usuarios.Rows[e.RowIndex].Cells[grid_usuarios.Columns[2].Name].Value.ToString();
             data_user.email = grid_usuarios.Rows[e.RowIndex].Cells[grid_usuarios.Columns[3].Name].Value.ToString();
             data_user.username = grid_usuarios.Rows[e.RowIndex].Cells[grid_usuarios.Columns[4].Name].Value.ToString();
-            db.Usuarios("U", grid_usuarios.Rows[e.RowIndex].Cells[grid_usuarios.Columns[0].Name].Value.ToString(), data_user);
+            db.Usuarios("U", data_user.idusuarios, data_user);
         }
 
         private void btn_guardar_Click(object sender, EventArgs e)
@@ -42,7 +44,7 @@ namespace formulario
             {
                 if(txt_nombre.Text.Length > 0 || txt_username.Text.Length > 0)
                 {
-                    MessageBox.Show("Existen campos vacios que son obligatorios.");
+                    MessageBox.Show("Existen campos vacios que son obligatorios");
                 }
                 else
                 {
