@@ -1,0 +1,10 @@
+D:\Projects\Projects\tuahorro\tuahorro\bin\Debug\tuahorro.exe
+D:\Projects\Projects\tuahorro\tuahorro\bin\Debug\tuahorro.pdb
+D:\Projects\Projects\tuahorro\tuahorro\obj\Debug\tuahorro.csprojResolveAssemblyReference.cache
+D:\Projects\Projects\tuahorro\tuahorro\obj\Debug\tuahorro.home.resources
+D:\Projects\Projects\tuahorro\tuahorro\obj\Debug\tuahorro.Properties.Resources.resources
+D:\Projects\Projects\tuahorro\tuahorro\obj\Debug\tuahorro.csproj.GenerateResource.Cache
+D:\Projects\Projects\tuahorro\tuahorro\obj\Debug\tuahorro.csproj.CoreCompileInputs.cache
+D:\Projects\Projects\tuahorro\tuahorro\obj\Debug\tuahorro.exe
+D:\Projects\Projects\tuahorro\tuahorro\obj\Debug\tuahorro.pdb
+D:\Projects\Projects\tuahorro\tuahorro\obj\Debug\tuahorro.csproj.ResolveComReference.cache

@@ -38,27 +38,23 @@ namespace Integration_nagiosReports
             txt_log.Clear();
             txt_error.Clear();
             anio = Convert.ToInt32(inpyear.Text);
-            if (existData(CB_mes.Text,true))
+            if (existData(CB_mes.Text, true))
             {
                 start = DateTime.Now;
-                WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 1,300);
+                WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 1, 300);
                 btn_insert.Enabled = false;
-                //MessageBox.Show(String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, anio));
+                
                 WriteToEventLog("nagiosReports", String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, anio), 2, 1);
                 getData(CB_mes.Text, "I");
             }
             else
             {
-                //DialogResult result = MessageBox.Show(String.Format("Ya existe informacion para el mes de {0} y Año {1}. ¿Desea actualizar la informacion?", CB_mes.Text, anio), "Alerta", MessageBoxButtons.YesNo);
-                //if (result == DialogResult.Yes)
-                //{
-                    start = DateTime.Now;
-                    btn_insert.Enabled = false;
-                    WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 1,300);
-                    getData(CB_mes.Text, "U");
-                //}
+                start = DateTime.Now;
+                btn_insert.Enabled = false;
+                WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 1, 300);
+                getData(CB_mes.Text, "U");
             }
-            
+            MessageBox.Show(String.Format("Se Termino el cargue para el mes de {0} y para el Año {1}. ", CB_mes.Text, anio));
         }
 
         private void cb_mes_cambio(object sender, EventArgs e)
@@ -122,19 +118,12 @@ namespace Integration_nagiosReports
                         if (existData(CB_mes.Text, false))
                         {
                             start = DateTime.Now;
-                            //WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2, 2);
-                            //MessageBox.Show(String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, anio));
                             getDataDay(CB_mes.Text, "I", row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString());
                         }
                         else
                         {
-                            //DialogResult result = MessageBox.Show(String.Format("Ya existe informacion para el mes de {0} y Año {1}. ¿Desea actualizar la informacion?", CB_mes.Text, anio), "Alerta", MessageBoxButtons.YesNo);
-                            //if (result == DialogResult.Yes)
-                            //{
-                                start = DateTime.Now;
-                                //WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2, 2);
-                                getDataDay(CB_mes.Text, "U", row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString());
-                            //}
+                            start = DateTime.Now;
+                            getDataDay(CB_mes.Text, "U", row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString());
                         }
                         WriteToEventLog(
                            "nagiosReports",
@@ -143,11 +132,9 @@ namespace Integration_nagiosReports
                            2);
                         txt_log.Clear();
                         txt_error.Clear();
-                        //btn_dataDiary_Click(sender, e);
                     }
                     else
                     {
-                        //MessageBox.Show("El host/Servicio no retorno datos en el mes, por ende no se requiere obtener datos diarios");
                         WriteToEventLog("nagiosReports", "El host/Servicio no retorno datos en el mes, por ende no se requiere obtener datos diarios \n " + url_final, 0, 200);
                         setMsgLog("Url " + url_final, 1);
                         setMsgLog(response.host_name + " y servicio " + response.description + " - Tiempos: ok:" + response.time_ok + ", Warning:" + response.time_warning + ", Critical:" + response.time_critical, 2);
@@ -168,7 +155,6 @@ namespace Integration_nagiosReports
             inpyear.ReadOnly = !inpyear.ReadOnly;
             CB_mes.Enabled = !CB_mes.Enabled;
             WriteToEventLog("nagiosReports", String.Format("Termina Cargue del proceso del mes de: {0} tiempo de ejecución: {1}", mes, DateTime.Now.Subtract(start).ToString()), 1,300);
-            //MessageBox.Show(String.Format("Termino proceso de cargue exitosamente para el mes de: {0}", mes));
         }
 
         private void setMsgLog(String msg, int tipoCampo)
@@ -239,37 +225,12 @@ namespace Integration_nagiosReports
             }
         }
 
-        //private void btn_dataDiary_Click(object sender, EventArgs e)
-        //{
-        //    txt_log.Clear();
-        //    txt_error.Clear();
-        //    btn_insert.Enabled = false;
-        //    if (existData(CB_mes.Text, false))
-        //    {
-        //        start = DateTime.Now;
-        //        WriteToEventLog("nagiosReports", String.Format("Inicia cargue para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2,2);
-        //        MessageBox.Show(String.Format("Se incia el proceso de carga para el mes de {0} para el Año {1}. ", CB_mes.Text, anio));
-        //        getDataDay(CB_mes.Text, "I");
-        //    }
-        //    else
-        //    {
-        //        DialogResult result = MessageBox.Show(String.Format("Ya existe informacion para el mes de {0} y Año {1}. ¿Desea actualizar la informacion?", CB_mes.Text, anio), "Alerta", MessageBoxButtons.YesNo);
-        //        if (result == DialogResult.Yes)
-        //        {
-        //            start = DateTime.Now;
-        //            WriteToEventLog("nagiosReports", String.Format("Inicia actualizacion para el mes de: {0} con start de: {1}", CB_mes.Text, start.ToString()), 2,2);
-        //            getDataDay(CB_mes.Text, "U");
-        //        }
-        //    }
-        //}
-
         private void getDataDay(String mes, String operation, String host, String Service, String idHost)
         {
             String startDate = "";
             String endDate = "";
             anio = Convert.ToInt32(inpyear.Text);
             int cantDays = DateTime.DaysInMonth(anio, GetDayofMonth(mes));
-            //DataTable dt = db.getHostService(operation,anio,mes,false);
             for(int idx = 1; idx<= cantDays; idx++)
             {
                 if(idx == cantDays)
@@ -316,12 +277,8 @@ namespace Integration_nagiosReports
                     setMsgLog("=========================================", 1);
                     setMsgLog("=========================================", 2);
                 }
-
                 db.insertUpdateDataDiary(operation, 2, 0, anio, mes, idx, 0, 0, 0, 0, "");
-//               WriteToEventLog("nagiosReports", String.Format("Termina Cargue del proceso del mes de: {0} y dia: {1} tiempo de ejecución: {2}, para el host:{3} - {4}", mes, idx.ToString(), DateTime.Now.Subtract(start).ToString(),host,idHost), 2,2);
-                
             }
-            //MessageBox.Show("Se termino el cargue de información");
         }
 
         private int GetDayofMonth(String mes)
@@ -356,6 +313,12 @@ namespace Integration_nagiosReports
                 default:
                     return 0;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txt_error.Text = String.Empty;
+            txt_log.Text = String.Empty;
         }
     }
 }
