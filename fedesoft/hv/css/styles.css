@@ -37,10 +37,12 @@ footer>div>div {
 
 main {
     width: 100%;
-    height: calc(100% - 130px);
+    min-height: 500px;
+    max-height: 500px;
+    overflow: hidden;
 }
 
-ul {
+.menu {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -48,11 +50,11 @@ ul {
     background-color: #333333c9;
 }
 
-li {
+.menu > li {
     float: left;
 }
 
-li a {
+.menu > li a {
     display: block;
     color: white;
     text-align: center;
@@ -60,6 +62,33 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+.menu > li a:hover {
     background-color: #111111;
+}
+
+.main__content {
+    overflow-y: auto;
+    height: 440px;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content>div {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.content>div>strong {
+    margin-right: 12px;
 }
