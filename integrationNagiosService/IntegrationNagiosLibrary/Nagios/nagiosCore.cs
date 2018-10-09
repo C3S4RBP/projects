@@ -207,7 +207,7 @@ namespace IntegrationNagiosLibrary.Nagios
                 endDate = (new DateTime(anio, mes, currentDay).ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
             }
 
-            DataTable dt = db.getHostService(operation, anio, GetNameMonth(mes), false, settingsDB);
+            DataTable dt = db.getHostService(operation, anio, GetNameMonth(mes), false, settingsDB, currentDay-1);
             foreach (DataRow row in dt.Rows)
             {
                 String url_final = String.Format(url, row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), startDate, endDate);

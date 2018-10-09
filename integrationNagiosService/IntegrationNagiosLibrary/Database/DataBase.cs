@@ -80,7 +80,7 @@ namespace IntegrationNagiosLibrary.Database
             return rta;
         }
 
-        public DataTable getHostService(String operation, int anio, String mes, Boolean isMonthly, ConnectionStringSettings settings)
+        public DataTable getHostService(String operation, int anio, String mes, Boolean isMonthly, ConnectionStringSettings settings, int dia = 0)
         {
             DataTable dt = new DataTable();
             sp = isMonthly ? "NG_SELECT" : "NG_SELECT_DIARY";
@@ -93,6 +93,10 @@ namespace IntegrationNagiosLibrary.Database
                 cmd.Parameters.Add(new SqlParameter("@V_OPERATION", 2));
                 cmd.Parameters.Add(new SqlParameter("@V_ANIO", anio));
                 cmd.Parameters.Add(new SqlParameter("@V_MES", mes));
+                if(sp == "NG_SELECT_DIARY")
+                {
+                    cmd.Parameters.Add(new SqlParameter("@V_DAY", dia));
+                }
                 cmd.CommandType = CommandType.StoredProcedure;
                 scn.Open();
                 da.SelectCommand = cmd;
