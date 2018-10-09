@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.inpyear = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.btn_updatehost = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CB_mes
@@ -124,11 +125,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btn_updatehost
+            // 
+            this.btn_updatehost.Location = new System.Drawing.Point(293, 7);
+            this.btn_updatehost.Name = "btn_updatehost";
+            this.btn_updatehost.Size = new System.Drawing.Size(75, 23);
+            this.btn_updatehost.TabIndex = 8;
+            this.btn_updatehost.Text = "host - ip";
+            this.btn_updatehost.UseVisualStyleBackColor = true;
+            this.btn_updatehost.Click += new System.EventHandler(this.btn_updatehost_Click);
+            // 
             // INR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 275);
+            this.Controls.Add(this.btn_updatehost);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.inpyear);
             this.Controls.Add(this.label2);
@@ -156,6 +168,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox inpyear;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_updatehost;
     }
 }
 

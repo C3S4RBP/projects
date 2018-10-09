@@ -1,0 +1,14 @@
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.exe
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.pdb
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\obj\Debug\integrationNagiosService.ProjectInstaller.resources
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\obj\Debug\integrationNagiosService.integrationNagiosService.resources
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\obj\Debug\integrationNagiosService.csproj.GenerateResource.Cache
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\obj\Debug\integrationNagiosService.csproj.CoreCompileInputs.cache
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\obj\Debug\integrationNagiosService.exe
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\obj\Debug\integrationNagiosService.pdb
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.exe.config
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\IntegrationNagiosLibrary.dll
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\IntegrationNagiosLibrary.pdb
+D:\Projects\Projects\integrationNagiosService\integrationNagiosService\obj\Debug\integrationNagiosService.csprojResolveAssemblyReference.cache

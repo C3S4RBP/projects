@@ -1,0 +1,13 @@
+﻿Instalando ensamblado 'D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   logfile = D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.InstallLog
+   assemblypath = D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.exe
+Instalando el servicio IntegrationOfNagiosService...
+El servicio IntegrationOfNagiosService se ha instalado correctamente.
+Creando el origen de EventLog IntegrationOfNagiosService en el registro Application...
+Confirmando ensamblado 'D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   logfile = D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.InstallLog
+   assemblypath = D:\Projects\Projects\integrationNagiosService\integrationNagiosService\bin\Debug\integrationNagiosService.exe

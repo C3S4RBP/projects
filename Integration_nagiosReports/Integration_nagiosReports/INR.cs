@@ -148,6 +148,7 @@ namespace Integration_nagiosReports
                     setMsgLog("la respuesta es null" + row.ItemArray[0] + " Servicio " + row.ItemArray[1], 2);
                     setMsgLog("=========================================", 1);
                     setMsgLog("=========================================", 2);
+                    db.insertUpdateData("I", 3, Convert.ToInt32(row.ItemArray[2]), anio, mes, 0, 0, 0, 0, "");
                 }
             }
             db.insertUpdateData(operation, 2, 0, anio, mes, 0, 0, 0, 0,"");
@@ -319,6 +320,22 @@ namespace Integration_nagiosReports
         {
             txt_error.Text = String.Empty;
             txt_log.Text = String.Empty;
+        }
+
+        private void btn_updatehost_Click(object sender, EventArgs e)
+        {
+            DataTable dt = db.getHost();
+            foreach (DataRow row in dt.Rows)
+            {
+                String url = "http://192.168.100.250/nagios/cgi-bin/objectjson.cgi?query=host&hostname={0}";
+                String url_final = String.Format(url, row.ItemArray[0]);
+                setMsgLog("Consumiendo el host " + row.ItemArray[0], 1);
+                var response = dat_nagios.getDetailHost(url_final);
+                if (response != null)
+                {
+                    db.updateDetailHost(row.ItemArray[0].ToString(), response.address);
+                }
+            }
         }
     }
 }

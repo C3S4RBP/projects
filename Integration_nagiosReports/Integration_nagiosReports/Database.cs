@@ -101,6 +101,8 @@ namespace Integration_nagiosReports
                 spcmd.Parameters.Add(new SqlParameter("@I_CRITICAL", v_critial));
                 spcmd.Parameters.Add(new SqlParameter("@I_NODATA", v_nodata));
                 spcmd.Parameters.Add(new SqlParameter("@I_URL", url));
+                spcmd.Parameters.Add(new SqlParameter("@I_HOSTIP", ""));
+                spcmd.Parameters.Add(new SqlParameter("@I_HOSTNAME", ""));
                 spcmd.CommandType = CommandType.StoredProcedure;
                 scn.Open();
                 spcmd.ExecuteReader();
@@ -153,6 +155,60 @@ namespace Integration_nagiosReports
             spcmd.Parameters.Add(new SqlParameter("@I_CRITICAL", v_critial));
             spcmd.Parameters.Add(new SqlParameter("@I_NODATA", v_nodata));
             spcmd.Parameters.Add(new SqlParameter("@I_URL", url));
+            spcmd.Parameters.Add(new SqlParameter("@I_HOSTIP", ""));
+            spcmd.Parameters.Add(new SqlParameter("@I_HOSTNAME", ""));
+            spcmd.CommandType = CommandType.StoredProcedure;
+            scn.Open();
+            spcmd.ExecuteReader();
+            scn.Close();
+        }
+           
+        public DataTable getHost()
+        {
+            DataTable dt = new DataTable();
+            sp = "NG_SELECT";
+            SqlCommand cmd = new SqlCommand();
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlConnection scn = new SqlConnection(settings.ConnectionString);
+            try
+            {
+                cmd = new SqlCommand(sp, scn);
+                cmd.Parameters.Add(new SqlParameter("@V_OPERATION", 3));
+                cmd.Parameters.Add(new SqlParameter("@V_ANIO", 2018));
+                cmd.Parameters.Add(new SqlParameter("@V_MES", "Julio"));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+            }
+            catch (SqlException x)
+            {
+                Console.WriteLine(x.Message);
+            }
+            finally
+            {
+                cmd.Dispose();
+                scn.Close();
+            }
+            return dt;
+        }
+
+        public void updateDetailHost(String host,String ipAdrres)
+        {
+            SqlConnection scn = new SqlConnection(settings.ConnectionString);
+            sp = "NG_INSERT_UPDATE";
+            SqlCommand spcmd = new SqlCommand(sp, scn);
+            spcmd.Parameters.Add(new SqlParameter("@I_OPERATION", "U"));
+            spcmd.Parameters.Add(new SqlParameter("@I_OPTION", 3));
+            spcmd.Parameters.Add(new SqlParameter("@I_IDHOST", 1));
+            spcmd.Parameters.Add(new SqlParameter("@I_ANIO", 1));
+            spcmd.Parameters.Add(new SqlParameter("@I_MES", ""));
+            spcmd.Parameters.Add(new SqlParameter("@I_OK", ""));
+            spcmd.Parameters.Add(new SqlParameter("@I_WARNING", ""));
+            spcmd.Parameters.Add(new SqlParameter("@I_CRITICAL", ""));
+            spcmd.Parameters.Add(new SqlParameter("@I_NODATA", ""));
+            spcmd.Parameters.Add(new SqlParameter("@I_URL", ""));
+            spcmd.Parameters.Add(new SqlParameter("@I_HOSTIP", ipAdrres));
+            spcmd.Parameters.Add(new SqlParameter("@I_HOSTNAME", host));
             spcmd.CommandType = CommandType.StoredProcedure;
             scn.Open();
             spcmd.ExecuteReader();

@@ -1,0 +1,9 @@
+D:\Projects\Projects\integrationNagiosService\ApForTest\bin\Debug\ApForTest.exe
+D:\Projects\Projects\integrationNagiosService\ApForTest\bin\Debug\ApForTest.pdb
+D:\Projects\Projects\integrationNagiosService\ApForTest\bin\Debug\IntegrationNagiosLibrary.dll
+D:\Projects\Projects\integrationNagiosService\ApForTest\bin\Debug\IntegrationNagiosLibrary.pdb
+D:\Projects\Projects\integrationNagiosService\ApForTest\obj\Debug\ApForTest.csprojResolveAssemblyReference.cache
+D:\Projects\Projects\integrationNagiosService\ApForTest\obj\Debug\ApForTest.csproj.CoreCompileInputs.cache
+D:\Projects\Projects\integrationNagiosService\ApForTest\obj\Debug\ApForTest.exe
+D:\Projects\Projects\integrationNagiosService\ApForTest\obj\Debug\ApForTest.pdb
+D:\Projects\Projects\integrationNagiosService\ApForTest\bin\Debug\ApForTest.exe.config

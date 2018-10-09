@@ -1,0 +1,8 @@
+D:\Projects\Projects\integrationNagiosService\IntegrationNagiosLibrary\bin\Debug\IntegrationNagiosLibrary.dll
+D:\Projects\Projects\integrationNagiosService\IntegrationNagiosLibrary\bin\Debug\IntegrationNagiosLibrary.pdb
+D:\Projects\Projects\integrationNagiosService\IntegrationNagiosLibrary\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\Projects\integrationNagiosService\IntegrationNagiosLibrary\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\Projects\integrationNagiosService\IntegrationNagiosLibrary\obj\Debug\IntegrationNagiosLibrary.csproj.CoreCompileInputs.cache
+D:\Projects\Projects\integrationNagiosService\IntegrationNagiosLibrary\obj\Debug\IntegrationNagiosLibrary.dll
+D:\Projects\Projects\integrationNagiosService\IntegrationNagiosLibrary\obj\Debug\IntegrationNagiosLibrary.pdb
+D:\Projects\Projects\integrationNagiosService\IntegrationNagiosLibrary\obj\Debug\IntegrationNagiosLibrary.csprojResolveAssemblyReference.cache
